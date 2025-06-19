@@ -2,8 +2,9 @@
 
 ## Setup
 - Get [`cppfront`](https://github.com/hsutter/cppfront) and build the compiler ([docs](https://hsutter.github.io/cppfront/welcome/overview/))
+- Get [`SFML3`](https://www.sfml-dev.org/download/sfml/3.0.0/)
 - Add `cppfront`(`.exe`) directory to path
-- In VS Studio
-  - Add `cppfront/include` include directory to `LocalIncludes.prop`
-    - This is accessible in the `View → Other Windows → Property Manager` pane under any specific configuration (i.e. `Debug | x64 → LocalIncludes` -- they are all references to the same prop)
-    - `Common Properties → VC++ Directories → General → Include Directories`
+- In Visual Studio, add user macros to `LocalIncludes.prop`
+  - This is accessible in the `View → Other Windows → Property Manager` pane under any specific configuration (i.e. `Debug | x64 → LocalIncludes` -- they are all references to the same prop)
+    - `cppfront` (i.e. `C:\github\cppfront`)
+    - `SFML` (i.e. `C:\SFML-3.0.0`)

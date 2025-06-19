@@ -140,9 +140,9 @@
     <None Include="LocalIncludes.props" />
     <CustomBuild Include="src\main.cpp2">
       <FileType>Document</FileType>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cppfront -cwd src/ main.cpp2 -p</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">cppfront -cwd src/ main.cpp2</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">src/main.cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cppfront -cwd src/ main.cpp2 -p</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cppfront -cwd src/ main.cpp2</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">src/main.cpp</Outputs>
     </CustomBuild>
   </ItemGroup>

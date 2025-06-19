@@ -60,27 +60,33 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="LocalIncludes.props" />
+    <Import Project="PreprocessorDefinitions.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="LocalIncludes.props" />
+    <Import Project="PreprocessorDefinitions.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="LocalIncludes.props" />
+    <Import Project="PreprocessorDefinitions.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="LocalIncludes.props" />
+    <Import Project="PreprocessorDefinitions.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>main</TargetName>
-    <IncludePath>$(cppfront)\include;$(SFML)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SFML)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(cppfront)\include;$(SFML)\include;$(steamworks)\sdk\public;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SFML)\lib;$(steamworks)\sdk\redistributable_bin\win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>main</TargetName>
+    <IncludePath>$(cppfront)\include;$(SFML)\include;$(steamworks)\sdk\public;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SFML)\lib;$(steamworks)\sdk\redistributable_bin\win64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -120,9 +126,11 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;steam_api64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
+      <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,7 +147,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;steam_api64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="LocalIncludes.props" />
@@ -150,6 +163,7 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">cppfront -cwd src/ main.cpp2</Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">src/main.cpp</Outputs>
     </CustomBuild>
+    <None Include="PreprocessorDefinitions.props" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

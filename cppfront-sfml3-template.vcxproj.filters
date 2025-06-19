@@ -15,12 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LocalIncludes.props" />
+    <None Include="PreprocessorDefinitions.props" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="src\main.cpp2" />

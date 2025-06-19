@@ -2,6 +2,6 @@
 #include <SFML/Window.hpp>
 
 main: () = {
-	std::cout << "Foo bar" << std::endl;
-	window := sf::RenderWindow(sf::VideoMode(sf::Vector2u(800, 600)), "SFML Cppfront Window");
+  std::cout << "Foo bar" << std::endl;
+  window := sf::RenderWindow(sf::VideoMode(sf::Vector2u(800, 600)), "SFML Cppfront Window");
 }

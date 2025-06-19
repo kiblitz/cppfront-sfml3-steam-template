@@ -76,6 +76,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>main</TargetName>
+    <IncludePath>$(cppfront)\include;$(SFML)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SFML)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>main</TargetName>
@@ -119,6 +121,9 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

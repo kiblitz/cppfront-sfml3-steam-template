@@ -22,8 +22,9 @@
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{f173d777-ca5f-4c45-9089-af72db6f6c6f}</ProjectGuid>
-    <RootNamespace>cppfrontsfml3template</RootNamespace>
+    <RootNamespace>cppfrontsfml3steamtemplate</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>cppfront-sfml3-steam-template</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -130,7 +131,9 @@
     </Link>
     <PostBuildEvent>
       <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np
-robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
+robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy $(ProjectDir) $(TargetDir) steam_appid.txt /NFL /NDL /NJH /NJS /nc /ns /np
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,7 +154,9 @@ robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.d
     </Link>
     <PostBuildEvent>
       <Command>robocopy $(SFML)\bin\ $(TargetDir) sfml-audio-3.dll sfml-graphics-3.dll sfml-network-3.dll sfml-system-3.dll sfml-window-3.dll /NFL /NDL /NJH /NJS /nc /ns /np
-robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np</Command>
+robocopy $(steamworks)\sdk\redistributable_bin\win64\ $(TargetDir) steam_api64.dll /NFL /NDL /NJH /NJS /nc /ns /np
+robocopy $(ProjectDir) $(TargetDir) steam_appid.txt /NFL /NDL /NJH /NJS /nc /ns /np
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

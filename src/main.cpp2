@@ -5,8 +5,10 @@
 
 #include <windows.h>
 
-alert: (title, desc) -> int = {
-  return MessageBox(nullptr, desc, title, MB_OK);
+util: namespace = {
+  alert: (title, desc) -> int = {
+    return MessageBox(nullptr, desc, title, MB_OK);
+  }
 }
 
 main: () -> int = {
@@ -14,9 +16,19 @@ main: () -> int = {
   errMsg: SteamErrMsg = ();
   if (SteamAPI_InitEx(errMsg&) != k_ESteamAPIInitResult_OK) {
     errStr := std::string(errMsg);
-    _ = alert(L"Error: Steam API Initialization", std::wstring(errStr.begin(), errStr.end()).c_str());
+    _ = util::alert(L"Error: Steam API Initialization", std::wstring(errStr.begin(), errStr.end()).c_str());
     return EXIT_FAILURE;
   }
   window := sf::RenderWindow(sf::VideoMode(sf::Vector2u(800, 600)), "SFML Cppfront Window");
+  while window.isOpen() {
+    (copy event := window.pollEvent())
+    while event
+    {
+      if event*.is<sf::Event::Closed>() {
+        window.close();
+      }
+      event = window.pollEvent();
+    }
+  }
   return 0;
 }

@@ -5,10 +5,6 @@
 
 #include <windows.h>
 
-error: (stringable) -> std::string = {
-  return "Error: {stringable}$";
-}
-
 alert: (title, desc) -> int = {
   return MessageBox(nullptr, desc, title, MB_OK);
 }

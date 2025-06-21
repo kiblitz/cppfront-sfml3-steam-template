@@ -6,8 +6,14 @@
 #include <windows.h>
 
 util: namespace = {
-  alert: (title, desc) -> int = {
+  alert: (title: LPCWSTR, desc: LPCWSTR) -> int = {
     return MessageBox(nullptr, desc, title, MB_OK);
+  }
+}
+
+handleKeyPressed: (inout window: sf::Window, keyPressed: sf::Event::KeyPressed) = {
+  if keyPressed.code == sf::Keyboard::Key::Escape {
+    window.close();
   }
 }
 
@@ -19,16 +25,30 @@ main: () -> int = {
     _ = util::alert(L"Error: Steam API Initialization", std::wstring(errStr.begin(), errStr.end()).c_str());
     return EXIT_FAILURE;
   }
-  window := sf::RenderWindow(sf::VideoMode(sf::Vector2u(800, 600)), "SFML Cppfront Window");
+
+  window := sf::RenderWindow((), "SFML Cppfront Window", sf::State::Fullscreen);
+  // SteamFriends()*.ActivateGameOverlay("friends");
   while window.isOpen() {
-    (copy event := window.pollEvent())
-    while event
+    SteamAPI_RunCallbacks();
+    (copy maybeEvent := window.pollEvent())
+    while maybeEvent
     {
-      if event*.is<sf::Event::Closed>() {
+      event := maybeEvent*;
+
+      if event.is<sf::Event::Closed>() {
         window.close();
       }
-      event = window.pollEvent();
+
+      maybeKeyPressed := event.getIf<sf::Event::KeyPressed>();
+      if maybeKeyPressed {
+        keyPressed := maybeKeyPressed*;
+        handleKeyPressed(window, keyPressed); 
+      }
+
+      maybeEvent = window.pollEvent();
     }
   }
+
+  SteamAPI_Shutdown();
   return 0;
 }
